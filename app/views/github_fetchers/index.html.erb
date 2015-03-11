@@ -10,14 +10,56 @@
 <%= submit_tag "Get Info" %>
 <% end %>
 
-<%= if @entered %>
-<% @entered.each do |field| %>
-<%= field  %><br>
-<% end %>
-<% end %>
 
 
+
+
+<% if @entered %>
+
+<%= image_tag @entered.avatar_url %>
+
+<table>
+<tr>
+  <td>
+    <strong>Username:</strong>
+  </td>
+  <td>
+    <%=@entered.login %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <strong>User ID:</strong>
+  </td>
+  <td>
+    <%=@entered.id %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <strong>Name:</strong>
+  </td>
+  <td>
+    <%=@entered.name %>
+  </td>
+</tr>
+
+
+</table>
+<% end %>
+
+<br>
+
+<%= form_tag github_fetchers_path, method: :get do %>
+<strong>Enter Git Hub User Name</strong>
+<%= text_field_tag :user_name_for_repos %>
+<%= submit_tag "Get Repository Names" %>
+<% end %>
+<br>
+
+<% if @repos %>
 <h2>Repositories</h2>
-<% @fetcher.client.repositories.each do |field| %>
+<% @repos.each do |field| %>
 <%= field.name  %><br>
+<% end %>
 <% end %>
