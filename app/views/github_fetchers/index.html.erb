@@ -1,0 +1,23 @@
+<h1>GitHub Dashboard</h1>
+
+<%= "<strong>Your Location: </strong>".html_safe + @fetcher.client.user.location%>
+<br>
+<br>
+
+<%= form_tag github_fetchers_path, method: :get do %>
+<strong>Enter Git Hub User Name</strong>
+<%= text_field_tag :user_name %>
+<%= submit_tag "Get Info" %>
+<% end %>
+
+<%= if @entered %>
+<% @entered.each do |field| %>
+<%= field  %><br>
+<% end %>
+<% end %>
+
+
+<h2>Repositories</h2>
+<% @fetcher.client.repositories.each do |field| %>
+<%= field.name  %><br>
+<% end %>
