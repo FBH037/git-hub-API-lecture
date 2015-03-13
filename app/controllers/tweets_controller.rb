@@ -3,8 +3,8 @@ class TweetsController < ApplicationController
   def index
     @tweet = Tweet.new
     @messages = []
-    if params[:u_n]
-      @tweets = @tweet.user_tweets(params[:u_n])
+    unless params[:entered].blank?
+      @tweets = @tweet.user_tweets(params[:entered][:u_n])
     end
     if params[:message]
       @tweet.make_tweet(params[:message])

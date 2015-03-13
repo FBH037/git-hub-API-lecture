@@ -1,14 +1,17 @@
-<h1 class= "header"> The Twittle</h1>
+<h1 class= "header page-header"> The Twittle</h1>
+<%= link_to "Github Dashboard", github_fetchers_path %>
+<br>
+<br>
 <% if @messages %>
 <% @messages.each do |message| %>
 <%= message %>
 <% end %>
 <% end %>
 
-<%= form_tag(tweets_path, method: :get) do  %>
-<%= label_tag "Enter Somones Twitter Handle" %>
-<%= text_field_tag :u_n %>
-<%= submit_tag "Get Tweets" %>
+<%= form_for :entered, {url: tweets_path, method: :get} do |f| %>
+<%= f.label "Enter Somones Twitter Handle" %>
+<%= f.text_field :u_n %>
+<%= f.submit "Get Tweets" %>
 <% end %>
 <br>
 <br>
@@ -19,7 +22,7 @@
 <% end %>
 <br>
 
-<% if params[:u_n] %>
+<% unless params[:entered].blank? %>
 <strong> <%= "These are the last 20 tweets from #{params[:u_n]}" %></strong>
 
 <table class= "table">
